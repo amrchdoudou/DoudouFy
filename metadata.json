@@ -1,0 +1,6 @@
+{
+  "name": "Stock & Order Manager",
+  "description": "Multi-language stock and sales management application with low stock alerts, printing, and profit dashboard, optimized for mobile phones and web.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

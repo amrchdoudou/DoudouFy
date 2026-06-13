@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;550;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-zinc-950: #09090b;
+}
+
+/* Base styles to establish the dark matte canvas */
+body {
+  background-color: #09090b !important;
+  color: #a1a1aa !important;
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Elegant glass-card layouts */
+.dark .glass-card,
+.dark .bg-white,
+.dark .bg-gray-50,
+.dark .dark\:bg-gray-800,
+.dark .dark\:bg-gray-850,
+.dark [id^="stat-"],
+.dark .bg-gray-100/50 {
+  background: rgba(24, 24, 27, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(63, 63, 70, 0.4) !important;
+  border-radius: 1rem !important;
+}
+
+/* Specific highlight elements override */
+.dark .text-gray-900,
+.dark .text-gray-905,
+.dark .dark\:text-gray-100,
+.dark .dark\:text-gray-150,
+.dark .dark\:text-white,
+.dark h1, .dark h2, .dark h3, .dark h4 {
+  color: #ffffff !important;
+}
+
+.dark .text-gray-500,
+.dark .text-gray-505,
+.dark .text-gray-400,
+.dark .dark\:text-gray-400,
+.dark .dark\:text-zinc-400 {
+  color: #a1a1aa !important;
+}
+
+.dark .border-gray-150,
+.dark .border-gray-200,
+.dark .dark\:border-gray-700,
+.dark .dark\:border-gray-700\/60,
+.dark .dark\:border-zinc-800,
+.dark .border-gray-100 {
+  border-color: rgba(39, 39, 42, 0.8) !important;
+}
+
+/* Table overrides for elegant spacing and hover states */
+.dark table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+.dark th {
+  background-color: rgba(18, 18, 18, 0.6) !important;
+  color: #71717a !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 1rem !important;
+  border-bottom: 1px solid rgba(39, 39, 42, 0.8) !important;
+}
+
+.dark td {
+  padding: 1rem !important;
+  border-bottom: 1px solid rgba(39, 39, 42, 0.4) !important;
+}
+
+.dark tr:hover {
+  background-color: rgba(39, 39, 42, 0.25) !important;
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Sophisticated status badges aligned to the mock design */
+.dark .status-badge,
+.dark span[class*="status-badge"],
+.dark .badge,
+.dark .rounded-full[class*="text-"] {
+  padding: 3px 8px !important;
+  border-radius: 4px !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Badge colors mapping */
+.dark .bg-emerald-50,
+.dark .bg-emerald-950\/40,
+.dark .bg-emerald-100,
+.dark .text-emerald-700,
+.dark .text-emerald-600 {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  color: #10b981 !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+
+.dark .bg-rose-50\/20,
+.dark .bg-rose-950,
+.dark .bg-rose-100,
+.dark .text-rose-700,
+.dark .text-rose-600 {
+  background-color: rgba(239, 68, 68, 0.12) !important;
+  color: #f87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+}
+
+.dark .bg-amber-50,
+.dark .bg-amber-950\/30,
+.dark .bg-amber-100,
+.dark .text-amber-700,
+.dark .text-amber-600 {
+  background-color: rgba(245, 158, 11, 0.12) !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(245, 158, 11, 0.2) !important;
+}
+
+.dark .bg-blue-50,
+.dark .bg-blue-950\/40,
+.dark .bg-blue-100,
+.dark .text-blue-700,
+.dark .text-blue-600 {
+  background-color: rgba(59, 130, 246, 0.12) !important;
+  color: #60a5fa !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Make sure active blue/indigo highlights across managers match corporate emerald green */
+.dark .bg-indigo-600,
+.dark .bg-indigo-505,
+.dark .bg-indigo-650,
+.dark .dark\:bg-indigo-600,
+.dark .bg-primary {
+  background-color: #059669 !important;
+  color: #ffffff !important;
+}
+
+.dark .bg-indigo-600:hover,
+.dark .bg-indigo-650:hover,
+.dark .dark\:bg-indigo-600:hover {
+  background-color: #10b981 !important;
+}
+
+.dark .text-indigo-650,
+.dark .text-indigo-600,
+.dark .text-indigo-400,
+.dark .dark\:text-indigo-400 {
+  color: #10b981 !important;
+}
+
+.dark .bg-indigo-50,
+.dark .bg-indigo-950\/40,
+.dark .bg-indigo-100 {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  color: #10b981 !important;
+}
+
+/* Glass inputs and selectors styling */
+.dark input[type="text"],
+.dark input[type="number"],
+.dark input[type="email"],
+.dark input[type="tel"],
+.dark input[type="search"],
+.dark select,
+.dark textarea {
+  background-color: #09090b !important;
+  border: 1px solid rgba(63, 63, 70, 0.6) !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  padding: 0.5rem 0.75rem !important;
+  outline: none !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.dark input[type="text"]:focus,
+.dark input[type="number"]:focus,
+.dark input[type="email"]:focus,
+.dark input[type="tel"]:focus,
+.dark input[type="search"]:focus,
+.dark select:focus,
+.dark textarea:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Layout spacing refinements */
+.dark hr {
+  border-color: rgba(39, 39, 42, 0.8) !important;
+}
+
+@layer utilities {
+  /* Print Layout Custom Override */
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #print-preview-receipt, #print-preview-receipt * {
+      visibility: visible;
+    }
+    #print-preview-receipt {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+  }
+}
