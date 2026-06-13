@@ -660,7 +660,7 @@ export default function OrderManager({
       {/* PRINT TICKET/INVOICE OVERLAY */}
       {printPreviewOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 overflow-y-auto">
-          <div className="bg-white dark:bg-gray-950 rounded-2xl w-full max-w-sm shadow-2xl p-6 border dark:border-gray-800 animate-in fade-in zoom-in-95 font-mono print:border-none print:shadow-none print:bg-white print:p-0 print:absolute print:inset-0 text-gray-900 text-xs text-left">
+          <div id="print-preview-receipt" className="bg-white dark:bg-gray-950 rounded-2xl w-full max-w-sm shadow-2xl p-6 border dark:border-gray-800 animate-in fade-in zoom-in-95 font-mono print:border-none print:shadow-none print:bg-white print:p-0 print:absolute print:inset-0 text-gray-900 text-xs text-left">
             {/* Action control bar (hidden when actually printing via CSS) */}
             <div className="flex justify-between items-center pb-4 border-b border-dashed print:hidden font-sans">
               <span className="font-bold text-gray-500 text-xs">Aperçu Facture / Ticket</span>
@@ -745,3 +745,4 @@ export default function OrderManager({
     </div>
   );
 }
+
