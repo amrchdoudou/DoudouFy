@@ -9,6 +9,7 @@ export interface Product {
   quantity: number;
   supplier: string;      // Fournisseur
   minStockAlert: number; // Seuil d'alerte
+  image?: string;        // URL ou DataURL Base64 de l'image
 }
 
 export interface Customer {

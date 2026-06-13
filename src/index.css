@@ -222,17 +222,46 @@ body {
 @layer utilities {
   /* Print Layout Custom Override */
   @media print {
+    @page {
+      margin: 0 !important;
+    }
+    html, body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
     body * {
       visibility: hidden;
     }
     #print-preview-receipt, #print-preview-receipt * {
-      visibility: visible;
+      visibility: visible !important;
+      color: #000000 !important;
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+      border-color: #000000 !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+    /* Explicitly prevent dark mode 'important' variables or classes from leakage during browser print */
+    .dark #print-preview-receipt,
+    .dark #print-preview-receipt * {
+      color: #000000 !important;
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+      border-color: #000000 !important;
     }
     #print-preview-receipt {
-      position: absolute;
-      left: 0;
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
       top: 0;
-      width: 100%;
+      width: 80mm !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 12px !important;
+      border: none !important;
+      box-sizing: border-box !important;
     }
   }
 }

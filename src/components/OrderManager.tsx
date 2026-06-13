@@ -560,14 +560,28 @@ export default function OrderManager({
                   </p>
                 ) : (
                   <div className="border border-gray-150 dark:border-gray-700 rounded-xl overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
-                    {orderItems.map((it) => (
-                      <div key={it.productId} className="flex justify-between items-center p-3 bg-white dark:bg-gray-800 text-xs">
-                        <div className="flex-1 min-w-0 pr-2">
-                          <p className="font-bold text-gray-900 dark:text-gray-100 truncate">{it.name}</p>
-                          <p className="text-3xs text-gray-400 font-sans">
-                            Achat: {it.purchasePrice} DA | Vente: {it.sellingPrice} DA
-                          </p>
-                        </div>
+                    {orderItems.map((it) => {
+                      const pObj = products.find((p) => p.id === it.productId);
+                      const prodImg = pObj?.image || `https://picsum.photos/seed/${encodeURIComponent(it.name)}/100/100`;
+
+                      return (
+                        <div key={it.productId} className="flex justify-between items-center p-3 bg-white dark:bg-gray-800 text-xs gap-3">
+                          {/* Small thumbnail preview */}
+                          <div className="w-10 h-10 rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700 bg-gray-50 flex-shrink-0 flex items-center justify-center">
+                            <img
+                              src={prodImg}
+                              alt={it.name}
+                              referrerPolicy="no-referrer"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            <p className="font-bold text-gray-900 dark:text-gray-100 truncate">{it.name}</p>
+                            <p className="text-3xs text-gray-400 font-sans">
+                              Achat: {it.purchasePrice} DA | Vente: {it.sellingPrice} DA
+                            </p>
+                          </div>
 
                         {/* Qty incrementer */}
                         <div className="flex items-center gap-1.5 px-3">
@@ -603,7 +617,7 @@ export default function OrderManager({
                           ✕
                         </button>
                       </div>
-                    ))}
+                    ); })}
 
                     {/* Total summary row */}
                     <div className="bg-gray-50 dark:bg-gray-900/60 p-4 text-right flex justify-between items-center font-sans">
@@ -745,4 +759,3 @@ export default function OrderManager({
     </div>
   );
 }
-

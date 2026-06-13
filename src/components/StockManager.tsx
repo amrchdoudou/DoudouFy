@@ -35,6 +35,7 @@ export default function StockManager({
   const [quantity, setQuantity] = useState(0);
   const [supplier, setSupplier] = useState('');
   const [minStockAlert, setMinStockAlert] = useState(5);
+  const [image, setImage] = useState('');
 
   const resetForm = () => {
     setName('');
@@ -44,6 +45,7 @@ export default function StockManager({
     setQuantity(0);
     setSupplier('');
     setMinStockAlert(5);
+    setImage('');
     setEditingProduct(null);
   };
 
@@ -61,6 +63,7 @@ export default function StockManager({
     setQuantity(p.quantity);
     setSupplier(p.supplier);
     setMinStockAlert(p.minStockAlert);
+    setImage(p.image || '');
     setShowModal(true);
   };
 
@@ -76,6 +79,7 @@ export default function StockManager({
       quantity: Number(quantity),
       supplier: supplier.trim() || t.anonymous,
       minStockAlert: Number(minStockAlert),
+      image: image.trim() || undefined,
     };
 
     if (editingProduct) {
@@ -181,6 +185,16 @@ export default function StockManager({
                 }`}
               >
                 <div>
+                  {/* Image container with fallback seed based on product name */}
+                  <div className="relative w-full h-36 bg-gray-55 dark:bg-gray-900/50 rounded-lg overflow-hidden mb-3.5 border border-gray-100 dark:border-gray-700/60 flex items-center justify-center">
+                    <img
+                      src={p.image || `https://picsum.photos/seed/${encodeURIComponent(p.name)}/400/300`}
+                      alt={p.name}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                    />
+                  </div>
+
                   <div className="flex justify-between items-start gap-2 mb-2">
                     <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-0.5 rounded-md text-xs font-mono font-medium">
                       {p.supplier}
@@ -401,6 +415,70 @@ export default function StockManager({
                   onChange={(e) => setMinStockAlert(Number(e.target.value))}
                   className="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-250 dark:border-gray-750 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none font-mono"
                 />
+              </div>
+
+              {/* Product Image Selection & Upload */}
+              <div className="space-y-2 border-t border-gray-100 dark:border-gray-700/60 pt-4">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">
+                  {language === 'ar' ? 'صورة المنتج' : language === 'fr' ? 'Image du Produit' : 'Product Image'}
+                </label>
+                
+                <div className="flex gap-4 items-center bg-gray-50/50 dark:bg-gray-900/30 p-3.5 rounded-xl border border-gray-150 dark:border-gray-700/40">
+                  {/* Image preview indicator */}
+                  <div className="w-16 h-16 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                    {image ? (
+                      <img src={image} alt="Preview" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-2xs text-gray-400 select-none text-center p-1">Auto-Gen</span>
+                    )}
+                  </div>
+                  
+                  <div className="flex-1 space-y-2.5">
+                    {/* Method A: Local File Upload */}
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        id="prod-image-file"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              setImage(reader.result as string);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                        className="hidden"
+                      />
+                      <label
+                        htmlFor="prod-image-file"
+                        className="inline-flex items-center justify-center px-3.5 py-1.5 border border-gray-200 dark:border-gray-750 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer shadow-xs transition-colors"
+                      >
+                        {image ? (language === 'ar' ? 'تغيير الصورة' : language === 'fr' ? 'Changer l\'image' : 'Change Image') : (language === 'ar' ? 'رفع ملف صورة' : language === 'fr' ? 'Télécharger image' : 'Upload Image')}
+                      </label>
+                      {image && (
+                        <button
+                          type="button"
+                          onClick={() => setImage('')}
+                          className="text-xs text-rose-600 dark:text-rose-450 font-bold hover:underline"
+                        >
+                          {language === 'ar' ? 'إزالة' : language === 'fr' ? 'Supprimer' : 'Remove'}
+                        </button>
+                      )}
+                    </div>
+                    
+                    {/* Method B: URL string input */}
+                    <input
+                      type="text"
+                      placeholder={language === 'ar' ? 'أو أدخل رابط مباشر للصورة (URL)...' : language === 'fr' ? 'Ou entrez l\'URL directe de l\'image...' : 'Or enter direct image URL...'}
+                      value={image.startsWith('data:') ? '' : image}
+                      onChange={(e) => setImage(e.target.value)}
+                      className="w-full text-xs px-3 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700/80 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Action buttons */}

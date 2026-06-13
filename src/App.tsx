@@ -63,7 +63,8 @@ export default function App() {
     unit_type: p.unitType,
     quantity: p.quantity,
     supplier: p.supplier,
-    min_stock_alert: p.minStockAlert
+    min_stock_alert: p.minStockAlert,
+    image: p.image || ''
   });
 
   const mapProductFromDb = (row: any): Product => ({
@@ -74,7 +75,8 @@ export default function App() {
     unitType: row.unit_type || 'unit',
     quantity: Number(row.quantity || 0),
     supplier: row.supplier || 'Anonyme',
-    minStockAlert: Number(row.min_stock_alert || 5)
+    minStockAlert: Number(row.min_stock_alert || 5),
+    image: row.image || undefined
   });
 
   // Mappers Customer
