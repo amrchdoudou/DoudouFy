@@ -24,6 +24,7 @@ export default function App() {
   const [language, setLanguage] = useState<Language>(() => {
     return (localStorage.getItem('sm_language') as Language) || 'fr';
   });
+  const [isLangOpen, setIsLangOpen] = useState(false);
 
   // Dark mode trigger
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -545,6 +546,7 @@ export default function App() {
   const handleLanguageChange = (lang: Language) => {
     setLanguage(lang);
     localStorage.setItem('sm_language', lang);
+    setIsLangOpen(false);
   };
 
   // Active theme trigger
@@ -588,36 +590,47 @@ export default function App() {
               </button>
 
               {/* Language Selector */}
-              <div className="relative group">
+              <div className="relative">
                 <button
                   id="btn-lang-dropdown"
-                  className="p-2 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-650 rounded-lg text-gray-550 dark:text-gray-300 transition-colors flex items-center gap-1.5 text-xs font-semibold"
+                  onClick={() => setIsLangOpen(!isLangOpen)}
+                  className="p-2 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-650 rounded-lg text-gray-550 dark:text-gray-300 transition-colors flex items-center gap-1.5 text-xs font-semibold focus:outline-none"
+                  aria-expanded={isLangOpen}
                 >
                   <Languages className="w-4 h-4" />
                   <span className="uppercase text-2xs">{language}</span>
                 </button>
-                <div className={`absolute top-full mt-1.5 w-40 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden hidden group-hover:block z-50 animate-in fade-in duration-1000 ${
-                  isRtl ? 'left-0' : 'right-0'
-                }`}>
-                  <button
-                    onClick={() => handleLanguageChange('fr')}
-                    className="w-full text-left font-sans block px-4 py-2 text-xs hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border-b border-gray-50 dark:border-gray-750 font-bold"
-                  >
-                    Français
-                  </button>
-                  <button
-                    onClick={() => handleLanguageChange('en')}
-                    className="w-full text-left font-sans block px-4 py-2 text-xs hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border-b border-gray-50 dark:border-gray-750 font-bold"
-                  >
-                    English
-                  </button>
-                  <button
-                    onClick={() => handleLanguageChange('ar')}
-                    className="w-full text-right font-sans block px-4 py-2 text-xs hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold"
-                  >
-                    العربية (Algeria)
-                  </button>
-                </div>
+                {isLangOpen && (
+                  <>
+                    {/* Touch-safe click-away backdrop to dismiss list */}
+                    <div 
+                      className="fixed inset-0 z-40 bg-transparent" 
+                      onClick={() => setIsLangOpen(false)}
+                    />
+                    <div className={`absolute top-full mt-1.5 w-40 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden z-50 animate-in fade-in duration-150 ${
+                      isRtl ? 'left-0' : 'right-0'
+                    }`}>
+                      <button
+                        onClick={() => handleLanguageChange('fr')}
+                        className="w-full text-left font-sans block px-4 py-2 text-xs hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border-b border-gray-50 dark:border-gray-750 font-bold"
+                      >
+                        Français
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange('en')}
+                        className="w-full text-left font-sans block px-4 py-2 text-xs hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border-b border-gray-50 dark:border-gray-750 font-bold"
+                      >
+                        English
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange('ar')}
+                        className="w-full text-right font-sans block px-4 py-2 text-xs hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold"
+                      >
+                        العربية (Algeria)
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
